@@ -42,10 +42,7 @@ def main():
     X_train, y_train = load_from_file("zip.train")
     X_test, y_test = load_from_file("zip.test")
     print('daten eingelesen')
-    result =  knn(X_train,X_test,2) 
-    print('distanzen berechnet')
-    matrix = evaluate(result,y_train, y_test)   # 
-    print(matrix)
+    print(len(X_train[0]))
 
 # calculating the distance between one point of the test set with all points of the training set
 def knn (training, test, k):
@@ -63,6 +60,7 @@ def knn (training, test, k):
         results.append(result)
     return results
 #counting the occurrence of a digit in the distance result 
+
 def count (trainLabel, result):
     counter = [0,0,0,0,0,0,0,0,0,0]
     for i in range (len(result)):

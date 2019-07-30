@@ -1,0 +1,10 @@
+     spam  mail 
+spam [523.  40.]        
+mail [ 41. 317.]
+
+Fehlerquote: 
+Spam:    40 / 523 = 0,076
+Mail:    41/ 317  = 0,13
+Gesamt:  81/(523+ 317) = 0,096
+
+Man kann anhand der Projection keine Aussagen machen, welche Merkmale am nützlichsten waren. 

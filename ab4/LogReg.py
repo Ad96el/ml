@@ -3,54 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
-'''
-def covariance_matrix(X, mu):
-    num_samples = len(X)
-    X_centered = X - mu # mu is subtracted from all rows of X
-    cov = X_centered.transpose().dot(X_centered) / num_samples
-    return cov
-
-
-def gauss(x_train, y_train):
-  labels = np.unique(y_train)
-  means = []
-  covariances = []
-  
-  for label in labels:
-    X_sub = x_train[y_train == label]
-    mean = np.mean(X_sub, axis=0)
-    means.append(mean)
-    cov = covariance_matrix(X_sub, mean)
-    I=np.eye(len(cov[0]))
-    while np.linalg.det(cov)==0:
-      cov=(0.001*I+0.999*cov)
-    covariances.append(cov)
-  
-  return labels, means, covariances
-
-
-def log_normal_distribution_pdf(X, sigma, mu):
-  dim = X.shape[1]
-  log_normalization_term = -dim / 2 * np.log(2 * np.pi) - 0.5 * np.log(np.linalg.det(sigma))
-
-  X_centered = X - mu
-  exponent = -0.5 * np.sum((X_centered).transpose() * (np.linalg.inv(sigma).dot((X_centered).transpose())), axis=0)
-
-  return log_normalization_term + exponent
-
-
-def predict(labels, means, covariances, X):
-  # vectorized prediction
-  results = np.zeros(len(X), dtype=int)
-  largest_log_probs = np.ones(len(X)) * -np.inf  # vector to save the largest log_probability for each sample
-  # iterate over all gaussian classifiers / classes
-  for label, mean, covariance in zip(labels, means, covariances):
-    log_probs = log_normal_distribution_pdf(X, covariance, mean)  # log(p(X)) for all data points -> vector of len(X) log_probabilities
-    results[log_probs > largest_log_probs] = label  # update class label where a new maximum was found
-    largest_log_probs = np.maximum(largest_log_probs, log_probs)  # update largest log probabilities
-
-  return results
-'''
 
 def confusion_matrix(y_true, y_predicted):
   size = len(set(y_true))
@@ -66,8 +18,9 @@ def predict_LogReg(beta,x):
   results=np.zeros(len(x))
   i=0
   for vector in x:
-    prob=1-(1/(1+np.exp(vector.dot(np.transpose(beta)))))
-    if prob>=0.5:
+    prob=1-(1/(1+np.exp( vector.T@beta )))
+    prob1 = (1/(1+np.exp( vector.T@beta )))
+    if prob>= prob1:
       results[i]=1
     i+=1
 
@@ -97,9 +50,7 @@ def normalize(x):
       if e>maximums[i]:
         maximums[i]=e
       i+=1
-
   x=x/maximums
-  
   return x
 
 def main():
@@ -107,7 +58,7 @@ def main():
   x = data[:, :-1]
   y = data[:, -1]
   x=normalize(x)
-  x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_state=30,stratify=y)
+  x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2)
   
   #labels, means, covariances = gauss(x_train, y_train)
   #y_pred = predict(labels, means, covariances, x_test)

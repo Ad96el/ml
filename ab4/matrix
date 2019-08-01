@@ -1,3 +1,5 @@
+Aufgabe 1) 
+     
      spam  mail 
 spam [523.  40.]        
 mail [ 41. 317.]
@@ -7,4 +9,14 @@ Spam:    40 / 523 = 0,076
 Mail:    41/ 317  = 0,13
 Gesamt:  81/(523+ 317) = 0,096
 
-Man kann anhand der Projection keine Aussagen machen, welche Merkmale am nützlichsten waren. 
+Die Eigenvectoren, die paralell zu dem Vektor der Fischerprojektion sind, hatten am meisten Einfluss.
+
+Aufgabe 2)
+
+Logistic Regression:
+Ergebnisse mit alpha = 0.2 und 1000 Iterationen:
+final score: 0.9066232356134636
+final confusion matrix: (rows=y_true columns=y_predicted)
+[527  31]
+[ 32 331]
+Aus der Konfusionsmatrix geht hervor, dass etwa gleich viele Fehlklassifikationen von Spam als Nicht-Spam und von Nicht-Spam als Spam vorgenommen wer

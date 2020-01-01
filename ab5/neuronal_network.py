@@ -43,7 +43,7 @@ def error(vec,val):
     t[val] = 1
     return vec - t 
 
-def asdf(vec):
+def count(vec):
     result = np.zeros(  (len(vec),len(vec)) )
     for i in range(len(vec)):
         result[i][i] += vec[i]*(1-vec[i])
@@ -58,11 +58,9 @@ def fit(x,y,test,label):
     deltaW3_ = 0
     deltaw1_ = 0
     for j in range(20):
-        #deltaW2_ = 0
-        #deltaW3_ = 0
-        #deltaw1_ = 0
-        for i in  range(len(x) ):
-            #ff 
+ 
+        for i in  range(len(x) ): 
+    
             o0_ = cont(x[i])
             o1 = sig(o0_@w1)
             o1_ = cont(o1)
@@ -71,9 +69,9 @@ def fit(x,y,test,label):
             o3 = sig(o2_@w3)
             #bp 
             e = error(o3, int(y[i]) )
-            D1 = asdf(o1)
-            D2 = asdf(o2)
-            D3 = asdf(o3)
+            D1 = count(o1)
+            D2 = count(o2)
+            D3 = count(o3)
             d3 = D3@e
             w3_ = np.delete(w3, len(w3)-1,0 )
             d2 = D2@w3_@d3
